@@ -92,9 +92,9 @@ std::vector<OCRPredictResult> PPOCR::ocr(cv::Mat img, bool det, bool rec,
     img_list.push_back(crop_img);
 
     // save crop image
-    std::string fname = cv::format("%05d_crop_img.jpg", j);
-    std::cout << "Save crop image to: " << fname << std::endl;
-    cv::imwrite(fname, crop_img);
+    //std::string fname = cv::format("%05d_crop_img.jpg", j);
+    //std::cout << "Save crop image to: " << fname << std::endl;
+    //cv::imwrite(fname, crop_img);
   }
   // cls
   if (cls && this->classifier_) {
@@ -117,9 +117,9 @@ void PPOCR::det(cv::Mat img, std::vector<OCRPredictResult> &ocr_results) {
   std::vector<std::vector<std::vector<int>>> boxes;
   std::vector<double> det_times;
 
-  std::cout << "Run detector..." << std::endl;
+  //std::cout << "Run detector..." << std::endl;
   this->detector_->Run(img, boxes, det_times);
-  std::cout << "det boxes size: " << boxes.size() << std::endl;
+  //std::cout << "det boxes size: " << boxes.size() << std::endl;
 
   for (int i = 0; i < boxes.size(); i++) {
     OCRPredictResult res;
@@ -139,9 +139,9 @@ void PPOCR::rec(std::vector<cv::Mat> img_list,
   std::vector<float> rec_text_scores(img_list.size(), 0);
   std::vector<double> rec_times;
 
-  std::cout << "Run recognizer..." << std::endl;    
+  //std::cout << "Run recognizer..." << std::endl;    
   this->recognizer_->Run(img_list, rec_texts, rec_text_scores, rec_times);
-  std::cout << "rec texts size: " << rec_texts.size() << std::endl;
+  //std::cout << "rec texts size: " << rec_texts.size() << std::endl;
 
   // output rec results
   for (int i = 0; i < rec_texts.size(); i++) {
@@ -159,9 +159,9 @@ void PPOCR::cls(std::vector<cv::Mat> img_list,
   std::vector<float> cls_scores(img_list.size(), 0);
   std::vector<double> cls_times;
 
-  std::cout << "Run classifier..." << std::endl;    
+  //std::cout << "Run classifier..." << std::endl;    
   this->classifier_->Run(img_list, cls_labels, cls_scores, cls_times);
-  std::cout << "cls labels size: " << cls_labels.size() << std::endl;
+  //std::cout << "cls labels size: " << cls_labels.size() << std::endl;
 
   // output cls results
   for (int i = 0; i < cls_labels.size(); i++) {

@@ -48,7 +48,7 @@ void PaddleUtil::rec_image(cv::Mat *img_with_words, char *out_text,
   // Print the OCR results
   for (int i = 0; i < ocr_result.size(); i++) {
     if (ocr_result[i].score != -1.0) {
-      std::cout << ocr_result[i].text << std::endl;
+      //std::cout << ocr_result[i].text << std::endl;
       strcat_s(out_text, *max_length + 1,ocr_result[i].text.c_str());
     } 
   } 
