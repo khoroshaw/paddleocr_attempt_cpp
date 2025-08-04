@@ -21,8 +21,8 @@ void PaddleUtil::init() {
   FLAGS_rec = true;
   FLAGS_cls = false;
   FLAGS_use_angle_cls = false;
-  FLAGS_det_model_dir = "model/ch_PP-OCRv4_det_infer";
-  FLAGS_rec_model_dir = "model/ch_PP-OCRv4_rec_infer";
+  FLAGS_det_model_dir = "model/whl/det/en/en_PP-OCRv3_det_infer";
+  FLAGS_rec_model_dir = "model/whl/rec/en/en_PP-OCRv4_rec_infer";
   FLAGS_rec_char_dict_path = "model/en_dict.txt";
 }
 
@@ -37,15 +37,23 @@ void PaddleUtil::rec_image(const string &imageFile) {
               << std::endl;
     return;
   }
+  //cv::imwrite("test.jpg", img);
 
   std::vector<OCRPredictResult> ocr_result =
       ocr.ocr(img, FLAGS_det, FLAGS_rec, FLAGS_cls);
 
-  Utility::print_result(ocr_result);
-  if (FLAGS_visualize && FLAGS_det) {
-    std::string file_name = Utility::basename(imageFile);
-    Utility::VisualizeBboxes(img, ocr_result, FLAGS_output + "/" + file_name);
-  }
+  // Print the OCR results
+  for (int i = 0; i < ocr_result.size(); i++) {
+    if (ocr_result[i].score != -1.0) {
+      std::cout << ocr_result[i].text << std::endl;
+    } 
+  } 
+
+  //Utility::print_result(ocr_result);
+  //if (FLAGS_visualize && FLAGS_det) {
+  //  std::string file_name = Utility::basename(imageFile);
+  //  Utility::VisualizeBboxes(img, ocr_result, FLAGS_output + "/" + file_name);
+  //}
 }
 
 //

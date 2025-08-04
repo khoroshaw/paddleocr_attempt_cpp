@@ -2,12 +2,16 @@
 //
 
 #include <iostream>
+#include <opencv2/opencv.hpp>
 
 #include "paddle_util.h"
 
 int main() {
 
   PaddleUtil::init();
+  std::cout << "PaddleOCR initialized.\n";
+  std::cout << "------------------------------------------------------"
+            << std::endl;
   PaddleUtil::get().rec_image("D:/MyFiles/SupconCup/pics/words.jpg");
   std::cout << "Done!\n";
 }

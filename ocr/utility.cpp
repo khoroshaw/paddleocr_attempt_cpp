@@ -278,7 +278,7 @@ void Utility::print_result(const std::vector<OCRPredictResult> &ocr_result) {
                 << " cls score: " << ocr_result[i].cls_score;
     }
     std::cout << std::endl;
-  }
+  } 
 }
 
 cv::Mat Utility::crop_image(cv::Mat &img, const std::vector<int> &box) {
