@@ -3,6 +3,8 @@
 #include "opencv2/imgproc.hpp"
 #include <iostream>
 #include <vector>
+#include <cstring>
+#define _CRT_SECURE_NO_WARNINGS 
 
 #include "paddle_util.h"
 #include <include/args.h>
@@ -26,14 +28,15 @@ void PaddleUtil::init() {
   FLAGS_rec_char_dict_path = "model/en_dict.txt";
 }
 
-void PaddleUtil::rec_image(const string &imageFile) {
+void PaddleUtil::rec_image(cv::Mat *img_with_words, char *out_text,
+                           int *max_length) {
   if (FLAGS_benchmark) {
     ocr.reset_timer();
   }
 
-  cv::Mat img = cv::imread(imageFile, cv::IMREAD_COLOR);
+  cv::Mat img = *img_with_words;
   if (!img.data) {
-    std::cerr << "[ERROR] image read failed! image path: " << imageFile
+    std::cerr << "[ERROR] image read failed! "
               << std::endl;
     return;
   }
@@ -46,8 +49,10 @@ void PaddleUtil::rec_image(const string &imageFile) {
   for (int i = 0; i < ocr_result.size(); i++) {
     if (ocr_result[i].score != -1.0) {
       std::cout << ocr_result[i].text << std::endl;
+      strcat_s(out_text, *max_length + 1,ocr_result[i].text.c_str());
     } 
   } 
+
 
   //Utility::print_result(ocr_result);
   //if (FLAGS_visualize && FLAGS_det) {

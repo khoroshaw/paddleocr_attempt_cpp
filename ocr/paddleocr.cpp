@@ -90,6 +90,8 @@ std::vector<OCRPredictResult> PPOCR::ocr(cv::Mat img, bool det, bool rec,
     cv::Mat crop_img;
     crop_img = Utility::GetRotateCropImage(img, ocr_result[j].box);
     img_list.push_back(crop_img);
+
+    // save crop image
     std::string fname = cv::format("%05d_crop_img.jpg", j);
     std::cout << "Save crop image to: " << fname << std::endl;
     cv::imwrite(fname, crop_img);

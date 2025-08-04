@@ -10,7 +10,7 @@ public:
 public:
   static PaddleUtil &get();
   static void init();
-  void rec_image(const string &imageFile);
+  void rec_image(cv::Mat *img_with_words, char *out_text, int *max_length);
 
 private:
   PaddleOCR::PPOCR ocr;
