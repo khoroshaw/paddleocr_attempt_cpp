@@ -1,0 +1,1 @@
+dumpbin /DEPENDENTS D:\MyFiles\SupconCup\my-paddleocr\x64\Release\my-paddleocr.exe
